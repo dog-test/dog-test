@@ -1,0 +1,24 @@
+{
+  "name": "dog-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dog-test/dog-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dog-test/dog-test/issues"
+  },
+  "homepage": "https://github.com/dog-test/dog-test#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "request": "^2.79.0"
+  }
+}
