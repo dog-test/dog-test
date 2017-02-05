@@ -44,7 +44,7 @@ app.post('/webhook/', function (req, res) {
       sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
     }
     if (event.postback) {
-      var text = JSON.stringify(event.postback)
+      var text = JSON.stringify(event.postback.payload)
       sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
       continue
     }
@@ -76,30 +76,15 @@ function sendGenericMessage(sender) {
         "attachment": {
             "type": "template",
             "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "First card",
-                    "subtitle": "Element #1 of an hscroll",
-                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-                    "buttons": [{
-                        "type": "web_url",
-                        "url": "https://www.messenger.com",
-                        "title": "web url"
-                    }, {
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for first element in a generic bubble",
-                    }],
-                }, {
-                    "title": "Second card",
-                    "subtitle": "Element #2 of an hscroll",
-                    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-                    "buttons": [{
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for second element in a generic bubble",
-                    }],
-                }]
+                "template_type": "button",
+                "text": "O que gostaria de fazer?",
+                "buttons": [
+                  {
+                    "type": "postback",
+                    "title": "Próxima tarefa",
+                    "payload": "USER_DEFINED_PAYLOAD"
+                  }
+                ]
             }
         }
     }
