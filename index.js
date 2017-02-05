@@ -34,6 +34,7 @@ app.post('/webhook/', function (req, res) {
   var messaging_events = req.body.entry[0].messaging
   for (var i = 0; i < messaging_events.length; i++) {
     var event = req.body.entry[0].messaging[i]
+    console.log(event);
     var sender = event.sender.id
     if (event.message && event.message.text) {
       var text = event.message.text
@@ -45,8 +46,8 @@ app.post('/webhook/', function (req, res) {
     }
     if (event.postback) {
       var text = event.postback.payload;
-      sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-      continue
+      sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token);
+      continue;
     }
   }
   res.sendStatus(200)
