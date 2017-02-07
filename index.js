@@ -64,6 +64,7 @@ function botFlow(text, sender, req, res) {
       sendGenericMessage(sender);
   } else if (text.match(/A-([\w\s]+):(\d+)/)) {
     var arr = text.match(/A-([\w\s]+):(\d+)/);
+    console.log(arr);
     var params = {
       text: arr[0],
       organizationId: arr[1]
