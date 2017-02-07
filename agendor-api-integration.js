@@ -1,6 +1,7 @@
 "use strict"
 var userToken = process.env.AGENDOR_TOKEN;
 var agendorUrl = "https://api.agendor.com.br/v1/";
+var request = require('request');
 
 module.exports.nextTask = function nextTask(sendTextMessage, sender) {
   request({
