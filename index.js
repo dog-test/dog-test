@@ -17,7 +17,7 @@ app.set('trust proxy', 1)
 app.use(bodyParser.json())
 
 // Process application/json
-app.use(session({ name: "session", keys: ['key1'] }))
+app.use(session({ name: "session", secret: process.env.AGENDOR_TOKEN }))
 
 // Index route
 app.get('/', function (req, res) {
