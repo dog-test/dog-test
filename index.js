@@ -1,6 +1,6 @@
 'use strict'
 var express = require('express');
-var session = require('express-session')
+var session = require('cookie-session')
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 // Process application/json
-app.use(session({ secret: process.env.AGENDOR_TOKEN }))
+app.use(session({ name: "session", keys: ['key1', 'key2'] }))
 
 // Index route
 app.get('/', function (req, res) {
@@ -52,7 +52,7 @@ app.post('/webhook/', function (req, res) {
   if (!event.postback) {
     res.sendStatus(200);
   }
-});
+})
 
 function botFlow(text, sender, req, res) {
   if (req.session.creatingTask) { //Clicou em criar tarefa
