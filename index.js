@@ -66,8 +66,8 @@ function botFlow(text, sender, req, res) {
     var arr = text.match(/A-([\w\s]+):(\d+)/);
     console.log(arr);
     var params = {
-      text: arr[0],
-      organization: arr[1]
+      text: arr[1],
+      organization: arr[2]
     };
     agendorApi.createTask(params, sendTextMessage, sender, req, res);
   } else {
