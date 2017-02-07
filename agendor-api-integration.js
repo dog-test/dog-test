@@ -16,7 +16,7 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender, res) {
       console.log('Error: ', response.body.error)
     }
     console.log("statusCode");
-    console.log(response.statusCode);
+    console.log(body);
     console.log("end statusCode");
     if (!error && response.statusCode == 200) {
       var text = formatTask(body[0]);
