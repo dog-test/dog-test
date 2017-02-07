@@ -27,13 +27,13 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender, res) {
 function formatTask(task) {
   var entity;
   var entityDesc;
-  if (task.deal) {
+  if (task.deal && task.deal.name) {
     entityDesc = "o negócio";
-    entity = task.deal.title;
-  } else if (task.organization) {
+    entity = task.deal.name;
+  } else if (task.organization && task.organization.name) {
     entityDesc = "a empresa";
-    entity = task.organization.legalName;
-  } else if (task.person) {
+    entity = task.organization.name;
+  } else if (task.person && task.person.name) {
     entityDesc = "a pessoa";
     entity = task.person.name;
   }
