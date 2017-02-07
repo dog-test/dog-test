@@ -2,6 +2,7 @@
 var userToken = process.env.AGENDOR_TOKEN;
 var agendorUrl = "https://api.agendor.com.br/v1/";
 var request = require('request');
+var moment = require('moment');
 
 module.exports.nextTask = function nextTask(sendTextMessage, sender, res) {
   request({
@@ -28,7 +29,7 @@ function formatTask(task) {
   var entityDesc;
   if (task.deal) {
     entityDesc = "o negócio";
-    entity = task.deal.name;
+    entity = task.deal.title;
   } else if (task.organization) {
     entityDesc = "a empresa";
     entity = task.organization.legalName;
@@ -42,7 +43,7 @@ function formatTask(task) {
 
   var textMessage = "Você possuí uma tarefa para " + entityDesc + ": " + entity + " ";
   if (dueDate) {
-    textMessage += "às " + dueDate;
+    textMessage += "às " + moment(dueDate).format("DD/MM/YYYY hh:mm");
   }
   if (text) {
     textMessage += "\n Descrição:\n" + text;
