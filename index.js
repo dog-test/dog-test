@@ -13,9 +13,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Process application/json
 app.use(bodyParser.json())
 
-// Process application/json
-app.use(session({ name: "session", secret: process.env.AGENDOR_TOKEN }))
-
 // Index route
 app.get('/', function (req, res) {
     res.send('Hello world, I am a chat bot')
