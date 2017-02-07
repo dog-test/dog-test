@@ -39,7 +39,7 @@ app.post('/webhook/', function (req, res) {
     var sender = event.sender.id
     if (event.message && event.message.text) {
       var text = event.message.text
-      if (text === 'Generic') {
+      if (text === 'Agendor') {
           sendGenericMessage(sender)
           continue
       }
