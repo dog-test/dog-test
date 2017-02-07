@@ -16,10 +16,10 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender, res) {
       console.log('Error: ', response.body.error)
     }
     console.log("statusCode");
-    console.log(body[0]);
+    console.log(body.first);
     console.log("end statusCode");
     if (!error && response.statusCode == 200) {
-      var text = formatTask(body[0]);
+      var text = formatTask(body.first);
       console.log("Text");
       console.log(text);
       console.log("End Text");
