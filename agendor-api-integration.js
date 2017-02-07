@@ -16,13 +16,10 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender, res) {
       console.log('Error: ', response.body.error)
     }
     console.log("statusCode");
-    console.log(body.first);
+    console.log(JSON.parse(body));
     console.log("end statusCode");
     if (!error && response.statusCode == 200) {
-      var text = formatTask(body.first);
-      console.log("Text");
-      console.log(text);
-      console.log("End Text");
+      var text = formatTask(body);
       sendTextMessage(text, sender);
       res.sendStatus(200);
     }
@@ -53,8 +50,5 @@ function formatTask(task) {
   if (text) {
     textMessage += "\n Descrição:\n" + text;
   }
-  console.log("Text Message");
-  console.log(task);
-  console.log("End Text Message");
   return textMessage;
 }
