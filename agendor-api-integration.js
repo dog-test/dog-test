@@ -15,13 +15,14 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender, res) {
     } else if (response.body.error) {
       console.log('Error: ', response.body.error)
     }
-
-    var text = formatTask(body[0]);
-    console.log("Text");
-    console.log(text);
-    console.log("End Text");
-    sendTextMessage(text, sender);
-    res.sendStatus(200);
+    if (!error && response.statusCode == 200) {
+      var text = formatTask(body[0]);
+      console.log("Text");
+      console.log(text);
+      console.log("End Text");
+      sendTextMessage(text, sender);
+      res.sendStatus(200);
+    }
   });
 };
 
