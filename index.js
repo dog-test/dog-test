@@ -1,5 +1,6 @@
 'use strict'
 var express = require('express');
+var session = require('express-session')
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
@@ -12,6 +13,9 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // Process application/json
 app.use(bodyParser.json())
+
+// Process application/json
+app.use(session({ secret: process.env.AGENDOR_TOKEN }))
 
 // Index route
 app.get('/', function (req, res) {
@@ -37,23 +41,34 @@ app.post('/webhook/', function (req, res) {
     var event = req.body.entry[0].messaging[i];
     var sender = event.sender.id
     if (event.message && event.message.text) {
-      var text = event.message.text
-      if (text === 'Agendor') {
-          sendGenericMessage(sender)
-          continue
-      }
-      sendTextMessage(sender, "🐶 au au, eu não entendo isso: " + text.substring(0, 200))
+      botFlow(event.message.text, sender, req, res);
     }
     if (event.postback) {
       var payload = event.postback.payload;
-      text = agendorApi[payload](sendTextMessage,sender, res);
+      text = agendorApi[payload](sendTextMessage, sender, req, res);
       continue;
     }
   }
   if (!event.postback) {
     res.sendStatus(200);
   }
-})
+});
+
+function botFlow(text, sender, req, res) {
+  if (req.session.creatingTask) { //Clicou em criar tarefa
+    if(!req.session.description) {
+      req.session.description = text;
+      agendorApi.createTask(sendTextMessage, sender, req, res);
+    } else { //Está mandando nome da empresa
+      req.session.organization = text;
+      agendorApi.createTask(sendTextMessage, sender, req, res);
+    }
+  } else if (text === 'Agendor') {
+      sendGenericMessage(sender);
+  } else {
+    sendTextMessage(sender, "🐶 au au, eu não entendo isso: " + text.substring(0, 200));
+  }
+}
 
 function sendTextMessage(sender, text) {
     var messageData = { text:text }
@@ -86,6 +101,11 @@ function sendGenericMessage(sender) {
                     "type": "postback",
                     "title": "Minha próxima tarefa?",
                     "payload": "nextTask"
+                  },
+                  {
+                    "type": "postback",
+                    "title": "Criar tarefa!",
+                    "payload": "createTask"
                   }
                 ]
             }
