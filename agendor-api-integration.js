@@ -17,6 +17,9 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender) {
     }
 
     var text = formatTask(body[0]);
+    console.log("Text");
+    console.log(text);
+    console.log("End Text");
     sendTextMessage(text, sender);
   })
 };
@@ -47,5 +50,6 @@ function formatTask(task) {
   }
   console.log("Text Message");
   console.log(task);
+  console.log("End Text Message");
   return textMessage;
 }
