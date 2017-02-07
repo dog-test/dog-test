@@ -45,7 +45,7 @@ app.post('/webhook/', function (req, res) {
     }
     if (event.postback) {
       var payload = event.postback.payload;
-      text = agendorApi[payload](sendTextMessage, sender, req, res);
+      agendorApi[payload](sendTextMessage, sender, req, res);
       continue;
     }
   }
