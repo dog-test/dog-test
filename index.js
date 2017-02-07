@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
-var agendorApi = require("agendor-api-integration.js");
+var agendorApi = require("./agendor-api-integration");
 
 app.set('port', (process.env.PORT || 5000))
 

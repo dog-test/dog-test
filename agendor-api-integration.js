@@ -1,12 +1,12 @@
 "use strict"
 var userToken = process.env.AGENDOR_TOKEN;
-agendorUrl = "https://api.agendor.com.br/v1/";
+var agendorUrl = "https://api.agendor.com.br/v1/";
 
 module.exports.nextTask = function nextTask(sendTextMessage, sender) {
   request({
     url: agendorUrl + "tasks",
     headers: {"Authorization": "Token " + userToken},
-    qs: {page:1, per_page:1}
+    qs: {page:1, per_page:1},
     method: 'GET'
   }, function(error, response, body) {
     if (error) {
@@ -15,8 +15,8 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender) {
       console.log('Error: ', response.body.error)
     }
 
-    formatTask(body[0]);
-    sendTextMessage(, sender);
+    var text = formatTask(body[0]);
+    sendTextMessage(text, sender);
   })
 };
 
