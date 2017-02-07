@@ -46,11 +46,13 @@ app.post('/webhook/', function (req, res) {
     }
     if (event.postback) {
       var payload = event.postback.payload;
-      text = agendorApi[payload](sendTextMessage,sender);
+      text = agendorApi[payload](sendTextMessage,sender, res);
       continue;
     }
   }
-  res.sendStatus(200)
+  if (!event.postback) {
+    res.sendStatus(200);
+  }
 })
 
 function sendTextMessage(sender, text) {

@@ -3,7 +3,7 @@ var userToken = process.env.AGENDOR_TOKEN;
 var agendorUrl = "https://api.agendor.com.br/v1/";
 var request = require('request');
 
-module.exports.nextTask = function nextTask(sendTextMessage, sender) {
+module.exports.nextTask = function nextTask(sendTextMessage, sender, res) {
   request({
     url: agendorUrl + "tasks",
     headers: {"Authorization": "Token " + userToken},
@@ -21,7 +21,8 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender) {
     console.log(text);
     console.log("End Text");
     sendTextMessage(text, sender);
-  })
+    res.sendStatus(200);
+  });
 };
 
 function formatTask(task) {
