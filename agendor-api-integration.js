@@ -17,7 +17,7 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender, res) {
       console.log('Error: ', response.body.error)
     }
     if (!error && response.statusCode == 200) {
-      var text = formatTask(JSON.parse(body)[0]);
+      var text = "🐶 au au! Fui lá no agendor e achei! \n\n " + formatTask(JSON.parse(body)[0]);
       sendTextMessage(sender, text);
       res.sendStatus(200);
     }
