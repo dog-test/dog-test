@@ -11,11 +11,13 @@ app.set('port', (process.env.PORT || 5000))
 // Process application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}))
 
+app.set('trust proxy', 1)
+
 // Process application/json
 app.use(bodyParser.json())
 
 // Process application/json
-app.use(session({ name: "session", keys: ['key1', 'key2'] }))
+app.use(session({ name: "session", keys: ['key1'] }))
 
 // Index route
 app.get('/', function (req, res) {
@@ -55,13 +57,13 @@ app.post('/webhook/', function (req, res) {
 })
 
 function botFlow(text, sender, req, res) {
-  console.log(req.sessionOptions)
-  if (req.sessionOptions.creatingTask) { //Clicou em criar tarefa
-    if(!req.sessionOptions.description) {
-      req.sessionOptions.description = text;
+  console.log(req.session)
+  if (req.session.creatingTask) { //Clicou em criar tarefa
+    if(!req.session.description) {
+      req.session.description = text;
       agendorApi.createTask(sendTextMessage, sender, req, res);
     } else { //Está mandando nome da empresa
-      req.sessionOptions.organization = text;
+      req.session.organization = text;
       agendorApi.createTask(sendTextMessage, sender, req, res);
     }
   } else if (text === 'Agendor') {

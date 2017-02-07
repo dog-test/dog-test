@@ -25,11 +25,11 @@ module.exports.nextTask = function nextTask(sendTextMessage, sender, req, res) {
 };
 
 module.exports.createTask = function createTask(sendTextMessage, sender, req, res) {
-  if (!req.sessionOptions.creatingTask) { //Iniciar criação de tarefa
-    req.sessionOptions.creatingTask = true;
+  if (!req.session.creatingTask) { //Iniciar criação de tarefa
+    req.session.creatingTask = true;
     var text = "Qual a descrição da tarefa?";
     sendTextMessage(sender, text);
-  } else if (req.sessionOptions.creatingTask && req.sessionOptions.description) { //Cadastrou descrição
+  } else if (req.session.creatingTask && req.session.description) { //Cadastrou descrição
     var text = "Para qual empresa? (ID 😭)";
     sendTextMessage(sender, text);
   } else { //enviando tarefa
@@ -37,8 +37,8 @@ module.exports.createTask = function createTask(sendTextMessage, sender, req, re
       url: agendorUrl + "tasks",
       headers: {"Authorization": "Token " + userToken},
       params: {
-        organization: parseInt(req.sessionOptions.organization),
-        text: req.sessionOptions.description
+        organization: parseInt(req.session.organization),
+        text: req.session.description
       },
       method: 'POST'
     }, function(error, response, body) {
@@ -50,7 +50,7 @@ module.exports.createTask = function createTask(sendTextMessage, sender, req, re
       if (!error && response.statusCode == 200) {
         var text = "🐶 au au! Deu certo! Cadastrei esta tarefa!";
         sendTextMessage(sender, text);
-        req.sessionOptions = null;
+        req.session = null;
         res.sendStatus(200);
       }
     });
