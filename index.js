@@ -55,13 +55,13 @@ app.post('/webhook/', function (req, res) {
 })
 
 function botFlow(text, sender, req, res) {
-  console.log(req.session)
-  if (req.session.creatingTask) { //Clicou em criar tarefa
-    if(!req.session.description) {
-      req.session.description = text;
+  console.log(req.sessionOptions)
+  if (req.sessionOptions.creatingTask) { //Clicou em criar tarefa
+    if(!req.sessionOptions.description) {
+      req.sessionOptions.description = text;
       agendorApi.createTask(sendTextMessage, sender, req, res);
     } else { //Está mandando nome da empresa
-      req.session.organization = text;
+      req.sessionOptions.organization = text;
       agendorApi.createTask(sendTextMessage, sender, req, res);
     }
   } else if (text === 'Agendor') {
