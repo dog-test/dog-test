@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
+var agendorApi = require("agendor-api-integration.js");
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -45,7 +46,8 @@ app.post('/webhook/', function (req, res) {
       sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
     }
     if (event.postback) {
-      var text = event.postback.payload;
+      var payload = event.postback.payload;
+      text = agendorApi[payload](sendTextMessage,sender);
       sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token);
       continue;
     }
@@ -82,8 +84,13 @@ function sendGenericMessage(sender) {
                 "buttons": [
                   {
                     "type": "postback",
-                    "title": "Próxima tarefa",
-                    "payload": "USER_DEFINED_PAYLOAD"
+                    "title": "Qual a minha próxima tarefa?",
+                    "payload": "nextTask"
+                  },
+                  {
+                    "type": "postback",
+                    "title": "Fazer Check-in em:",
+                    "payload": "checkIn"
                   }
                 ]
             }
