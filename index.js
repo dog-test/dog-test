@@ -55,6 +55,7 @@ app.post('/webhook/', function (req, res) {
 })
 
 function botFlow(text, sender, req, res) {
+  console.log(req)
   if (req.session.creatingTask) { //Clicou em criar tarefa
     if(!req.session.description) {
       req.session.description = text;
