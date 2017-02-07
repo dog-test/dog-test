@@ -67,7 +67,7 @@ function botFlow(text, sender, req, res) {
     console.log(arr);
     var params = {
       text: arr[1],
-      organization: arr[2]
+      organization: parseInt(arr[2])
     };
     agendorApi.createTask(params, sendTextMessage, sender, req, res);
   } else {
