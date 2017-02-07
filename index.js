@@ -48,7 +48,6 @@ app.post('/webhook/', function (req, res) {
     if (event.postback) {
       var payload = event.postback.payload;
       text = agendorApi[payload](sendTextMessage,sender);
-      sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token);
       continue;
     }
   }

@@ -45,5 +45,7 @@ function formatTask(task) {
   if (text) {
     textMessage += "\n Descrição:\n" + text;
   }
+  console.log("Text Message");
+  console.log(textMessage);
   return textMessage;
 }
