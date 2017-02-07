@@ -80,11 +80,11 @@ function sendGenericMessage(sender) {
             "type": "template",
             "payload": {
                 "template_type": "button",
-                "text": "O que gostaria de fazer?",
+                "text": "O que gostaria de fazer? 🐕",
                 "buttons": [
                   {
                     "type": "postback",
-                    "title": "Qual a próxima tarefa?",
+                    "title": "Minha próxima tarefa?",
                     "payload": "nextTask"
                   }
                 ]
