@@ -84,13 +84,8 @@ function sendGenericMessage(sender) {
                 "buttons": [
                   {
                     "type": "postback",
-                    "title": "Qual a minha próxima tarefa?",
+                    "title": "Qual a próxima tarefa?",
                     "payload": "nextTask"
-                  },
-                  {
-                    "type": "postback",
-                    "title": "Fazer Check-in em:",
-                    "payload": "checkIn"
                   }
                 ]
             }
