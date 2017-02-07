@@ -31,7 +31,7 @@ module.exports.createTask = function createTask(params, sendTextMessage, sender,
     params: params,
     method: 'POST'
   }, function(error, response, body) {
-    console.log("BODY", body);
+    console.log("BODY", body, params);
     if (error) {
       console.log('Error sending messages: ', error)
     } else if (response.body.error) {
