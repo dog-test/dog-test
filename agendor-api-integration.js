@@ -28,7 +28,7 @@ module.exports.createTask = function createTask(params, sendTextMessage, sender,
   request({
     url: agendorUrl + "tasks",
     headers: {"Authorization": "Token " + userToken},
-    body: JSON.parse(params),
+    body: JSON.stringify(params),
     method: 'POST'
   }, function(error, response, body) {
     console.log(body);
