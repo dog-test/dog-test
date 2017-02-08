@@ -76,10 +76,6 @@ function botFlow(text, sender, req, res) {
 }
 
 function sendTextMessage(sender, text) {
-    console.log("sendTextMessage");
-    console.log(text);
-    console.log(sender);
-
     var messageData = { text:text }
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
