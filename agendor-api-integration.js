@@ -31,12 +31,14 @@ module.exports.createTask = function createTask(params, sendTextMessage, sender,
     body: JSON.stringify(params),
     method: 'POST'
   }, function(error, response, body) {
-    console.log(body);
     if (error) {
       console.log('Error sending messages: ', error)
     } else if (response.body.error) {
       console.log('Error: ', response.body.error)
     }
+    console.log("~~~~~~createTask");
+    console.log(response.statusCode);
+    console.log(error);
     if (!error && response.statusCode == 200) {
       var text = "🐶 au au! Deu certo! Cadastrei esta tarefa!";
       sendTextMessage(sender, text);
