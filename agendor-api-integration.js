@@ -39,7 +39,6 @@ module.exports.createTask = function createTask(params, sendTextMessage, sender,
     if (!error && response.statusCode == 201) {
       var text = "🐶 au au! Deu certo! Cadastrei esta tarefa!";
       sendTextMessage(sender, text);
-      res.sendStatus(201);
     }
   });
 };
